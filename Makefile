@@ -9,7 +9,7 @@ CONFIG_APPS := nvim ghostty
 KEYD_CONF_SRC := $(DOTFILES_DIR)/keyd/default.conf
 KEYD_CONF_DST := /etc/keyd/default.conf
 
-.PHONY: all help install uninstall list install-keyd uninstall-keyd
+.PHONY: all help install uninstall list install-keyd uninstall-keyd install-zsh uninstall-zsh
 
 all: install ## Link all configs
 
@@ -21,6 +21,7 @@ install: ## Stow configs into ~/.config/<app> (keyd on Linux only)
 		mkdir -p $(CONFIG_TARGET)/$$app; \
 		stow -v -R -d $(DOTFILES_DIR) -t $(CONFIG_TARGET)/$$app $$app; \
 	done
+	@$(MAKE) install-zsh
 ifeq ($(OS),Linux)
 	@$(MAKE) install-keyd
 endif
@@ -29,6 +30,7 @@ uninstall: ## Unstow all configs
 	@for app in $(CONFIG_APPS); do \
 		stow -v -D -d $(DOTFILES_DIR) -t $(CONFIG_TARGET)/$$app $$app; \
 	done
+	@$(MAKE) uninstall-zsh
 ifeq ($(OS),Linux)
 	@$(MAKE) uninstall-keyd
 endif
@@ -45,6 +47,19 @@ uninstall-keyd: ## (Linux only) Remove keyd config symlink from /etc/keyd/defaul
 		sudo rm -f $(KEYD_CONF_DST); \
 		echo "Removed $(KEYD_CONF_DST)"; \
 	fi
+
+install-zsh: ## Stow zsh dotfiles into $HOME
+	@for f in $(shell cd $(DOTFILES_DIR)/zsh && find . -type f | sed 's|^\./||'); do \
+		target=$(HOME)/$$f; \
+		if [ -e "$$target" ] && [ ! -L "$$target" ]; then \
+			echo "Backing up $$target -> $$target.bak"; \
+			mv "$$target" "$$target.bak"; \
+		fi; \
+	done
+	@stow -v -R -d $(DOTFILES_DIR) -t $(HOME) zsh
+
+uninstall-zsh: ## Unstow zsh dotfiles from $HOME
+	@stow -v -D -d $(DOTFILES_DIR) -t $(HOME) zsh
 
 list: ## List symlinks managed by this repo
 	@find $(CONFIG_TARGET) -maxdepth 3 -type l -ls | grep $(DOTFILES_DIR)
