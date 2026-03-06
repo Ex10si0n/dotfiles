@@ -1,0 +1,388 @@
+format = """\
+$username\
+$os\
+$hostname\
+${custom.ssh_label}\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+(down Toolchain version modules ↓)\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+(↑ Toolchain version modules ↑)\
+$nix_shell\
+$conda\
+$memory_usage\
+$aws\
+$gcloud\
+$env_var\
+$crystal\
+$cmd_duration\
+$custom\
+$time\
+(↑ above input line ↑)\
+$line_break\
+(↓ on input line ↓)\
+$jobs\
+$battery\
+$status\
+${custom.prompt_char_ro}\
+${custom.prompt_char_ok}\
+${custom.prompt_char_err}\
+"""
+
+# Timeout for starship to scan files (in milliseconds)
+scan_timeout = 30
+
+# Add a new line before the start of the prompt
+add_newline = true
+
+[battery]
+full_symbol = "󰁹"
+charging_symbol = "󰂄"
+discharging_symbol = "󰂃"
+format = "[$symbol$percentage]($style) "
+[[battery.display]]
+threshold = 10
+style = "red bold"
+
+[character]
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+vicmd_symbol = "[](bold blue)"
+
+[custom.prompt_char_ro]
+when = '[ ! -w . ]'
+command = 'true'
+format = '[󰈈](bold yellow) '
+
+[custom.prompt_char_ok]
+when = '[ -w . ] && [ "${STARSHIP_CMD_STATUS:-0}" = "0" ]'
+command = 'true'
+format = '[](bold green) '
+
+[custom.prompt_char_err]
+when = '[ -w . ] && [ "${STARSHIP_CMD_STATUS:-0}" != "0" ]'
+command = 'true'
+format = '[](bold red) '
+
+[cmake]
+format = "via [$symbol$version]($style) "
+symbol = "󰏖 "
+style = "bold blue"
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+show_milliseconds = false
+style = "yellow green"
+show_notifications = false
+min_time_to_notify = 45_000
+
+[conda]
+truncation_length = 1
+format = "via [$symbol$environment]($style) "
+symbol = "󰌠 "
+style = "green bold"
+ignore_base = true
+
+[dart]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold blue"
+
+[directory]
+disabled = false
+truncation_length = 3
+truncate_to_repo = true
+fish_style_pwd_dir_length = 0
+use_logical_path = true
+format = "at [$path](bold blue) "
+read_only = " 󱞊"
+read_only_style = "red"
+truncation_symbol = "…/"
+home_symbol = " "
+
+[directory.substitutions]
+# 'from' = 'to'
+
+[docker_context]
+disabled = false
+symbol = " "
+style = "blue bold"
+format = "via [$symbol$context]($style) "
+only_with_files = true
+
+[env_var]
+disabled = false
+symbol = "󰫧"
+style = "black bold dimmed"
+format = "with [$env_value]($style) "
+
+[gcloud]
+disabled = true
+format = 'on [$symbol$account(\($region\))]($style) '
+symbol = "󱇶 "
+style = "bold blue"
+
+[git_branch]
+disabled = false
+format = "on [$symbol$branch]($style) "
+symbol = " "
+style = "bold purple"
+truncation_symbol = "…"
+
+[git_commit]
+disabled = false
+commit_hash_length = 7
+format = '[\($hash\)]($style) '
+style = "green bold"
+only_detached = true
+
+[git_state]
+disabled = false
+rebase = "REBASING"
+merge = "MERGING"
+revert = "REVERTING"
+cherry_pick = "CHERRY-PICKING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+style = "bold yellow"
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+
+[git_status]
+disabled = false
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "red bold"
+stashed = '\$'
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+conflicted = "="
+deleted = "✘"
+renamed = "»"
+modified = "!"
+staged = "+"
+untracked = "?"
+
+[golang]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold cyan"
+
+[helm]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = "⎈ "
+style = "bold white"
+
+[hostname]
+disabled = false
+ssh_only = false
+format = "[$hostname](bold red) "
+aliases = { "zhongboy-mac" = "gMac", "Reactor" = "Reactor" }
+
+[custom.ssh_label]
+when = "test -n \"$SSH_CONNECTION\""
+command = "echo ' 󱕵 ssh'"
+format = "via [$output](bold yellow) "
+
+[os]
+disabled = false
+style = "bold red"
+
+[os.symbols]
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰡨 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+
+[java]
+disabled = false
+format = "via [$symbol$version]($style) "
+style = "red"
+symbol = " "
+
+[jobs]
+disabled = false
+threshold = 1
+format = "[$symbol$number]($style)"
+symbol = "󰣕 "
+style = "bold blue"
+
+[julia]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold purple"
+
+[kubernetes]
+disabled = true
+symbol = "󱃾 "
+format = '[$symbol$context( \($namespace\))]($style) in '
+style = "bold cyan"
+
+[line_break]
+disabled = false
+
+[memory_usage]
+disabled = true
+threshold = 75
+format = "via $symbol[$ram( | $swap)]($style) "
+style = "white bold dimmed"
+symbol = "󰍛 "
+
+[hg_branch]
+disabled = false
+symbol = " "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
+truncation_symbol = "…"
+
+[nodejs]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold green"
+
+[package]
+disabled = false
+format = "is [$symbol$version]($style) "
+symbol = "󰏗 "
+style = "208 bold"
+display_private = false
+
+[python]
+disabled = false
+pyenv_version_name = false
+pyenv_prefix = "pyenv "
+python_binary = "python"
+format = 'via [${symbol}${pyenv_prefix}${version}( \($virtualenv\))]($style) '
+style = "yellow bold"
+symbol = " "
+
+[ruby]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold red"
+
+[rust]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold red"
+
+[shlvl]
+disabled = true
+threshold = 2
+format = "[$symbol$shlvl]($style) "
+symbol = "↕"
+style = "bold yellow"
+
+[singularity]
+disabled = false
+format = '[$symbol\[$env\]]($style) '
+symbol = "󰗽 "
+style = "blue bold dimmed"
+
+[swift]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = " "
+style = "bold 202"
+
+[status]
+disabled = true
+format = "[$symbol$status]($style) "
+symbol = "✖"
+style = "bold red"
+
+[terraform]
+disabled = false
+format = "via [$symbol$workspace]($style) "
+symbol = "󱁢 "
+style = "bold 105"
+
+[time]
+disabled = false
+format = "at [$time]($style) "
+style = "bold green"
+use_12hr = false
+time_format = "%H:%M"
+utc_time_offset = "local"
+time_range = "-"
+
+[username]
+disabled = false
+format = "[$user]($style) on "
+style_root = "blue bold"
+style_user = "blue bold"
+show_always = true
+
+[zig]
+disabled = false
+format = "via [$symbol$version]($style) "
+symbol = "↯ "
+style = "bold yellow"

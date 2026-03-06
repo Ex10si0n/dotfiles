@@ -31,6 +31,7 @@ export EDITOR=nvim
 
 # Local bin for starship
 export PATH="$HOME/.local/bin:$PATH"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # Path for npm
 export PATH="$(npm prefix -g)/bin:$PATH"

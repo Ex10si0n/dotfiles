@@ -9,7 +9,7 @@ CONFIG_APPS := nvim ghostty
 KEYD_CONF_SRC := $(DOTFILES_DIR)/keyd/default.conf
 KEYD_CONF_DST := /etc/keyd/default.conf
 
-.PHONY: all help install uninstall list install-keyd uninstall-keyd install-zsh uninstall-zsh
+.PHONY: all help install uninstall list install-keyd uninstall-keyd install-zsh uninstall-zsh install-starship uninstall-starship
 
 all: install ## Link all configs
 
@@ -22,6 +22,7 @@ install: ## Stow configs into ~/.config/<app> (keyd on Linux only)
 		stow -v -R -d $(DOTFILES_DIR) -t $(CONFIG_TARGET)/$$app $$app; \
 	done
 	@$(MAKE) install-zsh
+	@$(MAKE) install-starship
 ifeq ($(OS),Linux)
 	@$(MAKE) install-keyd
 endif
@@ -31,6 +32,7 @@ uninstall: ## Unstow all configs
 		stow -v -D -d $(DOTFILES_DIR) -t $(CONFIG_TARGET)/$$app $$app; \
 	done
 	@$(MAKE) uninstall-zsh
+	@$(MAKE) uninstall-starship
 ifeq ($(OS),Linux)
 	@$(MAKE) uninstall-keyd
 endif
@@ -47,6 +49,13 @@ uninstall-keyd: ## (Linux only) Remove keyd config symlink from /etc/keyd/defaul
 		sudo rm -f $(KEYD_CONF_DST); \
 		echo "Removed $(KEYD_CONF_DST)"; \
 	fi
+
+install-starship: ## Stow starship.toml into ~/.config/starship
+	@mkdir -p $(CONFIG_TARGET)/starship
+	@stow -v -R -d $(DOTFILES_DIR) -t $(CONFIG_TARGET)/starship starship
+
+uninstall-starship: ## Unstow starship.toml from ~/.config/starship
+	@stow -v -D -d $(DOTFILES_DIR) -t $(CONFIG_TARGET)/starship starship
 
 install-zsh: ## Stow zsh dotfiles into $HOME
 	@for f in $(shell cd $(DOTFILES_DIR)/zsh && find . -type f | sed 's|^\./||'); do \
