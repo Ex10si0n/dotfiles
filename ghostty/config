@@ -1,6 +1,6 @@
 # [MARK] Font Configuration
 font-family = "Maple Mono NF CN"
-font-size = 11
+font-size = 13
 font-feature = "calt, cv01, cv02, cv33, cv34, cv35, cv36, cv61, cv62, ss01, ss02, ss05, ss06, ss07, ss08"
 
 # [MARK] Cursor & Shell
@@ -14,8 +14,8 @@ theme = Bright Lights
 window-theme = dark
 
 # [MARK] Window Layout
-window-height = 42
-window-width = 132
+window-height = 32
+window-width = 110
 window-padding-balance = true
 window-padding-x = 4 
 window-padding-y = 4
