@@ -33,11 +33,12 @@ export EDITOR=nvim
 export PATH="$HOME/.local/bin:$PATH"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
-# Path for npm
-export PATH="$(npm prefix -g)/bin:$PATH"
+# Node Versions
+# export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 # Starship
 zle -N zle-keymap-select 2>/dev/null
 zle -D zle-keymap-select 2>/dev/null
 eval "$(starship init zsh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
