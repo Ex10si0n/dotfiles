@@ -15,6 +15,11 @@ znap source zdharma-continuum/fast-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
 znap source marlonrichert/zsh-autocomplete
 
+# Autocomplete Tuning
+# https://stackoverflow.com/questions/11916064/zsh-tab-completion-duplicating-command-name
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+
 # General Aliases
 alias g="git"
 alias py="python3"
@@ -26,7 +31,7 @@ alias cd="z"
 # Default Softwares
 export EDITOR=nvim
 
-# Local bin for starship
+# Local bin for Starship
 export PATH="$HOME/.local/bin:$PATH"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
@@ -41,3 +46,10 @@ eval "$(starship init zsh)"
 
 # Zoxide
 eval "$(zoxide init zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/ex10si0n/.lmstudio/bin"
+# End of LM Studio CLI section
+
+
+. "$HOME/.local/share/../bin/env"
