@@ -13,6 +13,7 @@ source ~/.zshplugins/znap/znap.zsh
 # Plugins
 znap source zdharma-continuum/fast-syntax-highlighting
 znap source zsh-users/zsh-autosuggestions
+zstyle ':autocomplete:*' async off
 znap source marlonrichert/zsh-autocomplete
 
 # Autocomplete Tuning
