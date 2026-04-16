@@ -20,6 +20,8 @@ alias g="git"
 alias py="python3"
 alias vim="nvim"
 alias m="make"
+alias ls="eza"
+alias cd="z"
 
 # Default Softwares
 export EDITOR=nvim
