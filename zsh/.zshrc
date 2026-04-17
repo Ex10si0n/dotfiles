@@ -26,6 +26,11 @@ alias cd="z"
 # Default Softwares
 export EDITOR=nvim
 
+# fzf Key Bindings
+source <(fzf --zsh)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude Library --exclude Documents . /Users/ex10si0n /Volumes/Code'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # Local bin for Starship
 export PATH="$HOME/.local/bin:$PATH"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
