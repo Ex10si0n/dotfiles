@@ -46,7 +46,6 @@ $gcloud\
 $env_var\
 $crystal\
 $cmd_duration\
-$custom\
 $time\
 (↑ above input line ↑)\
 $line_break\
@@ -54,9 +53,7 @@ $line_break\
 $jobs\
 $battery\
 $status\
-${custom.prompt_char_ro}\
-${custom.prompt_char_ok}\
-${custom.prompt_char_err}\
+$character
 """
 
 # Timeout for starship to scan files (in milliseconds)
@@ -78,21 +75,6 @@ style = "red bold"
 success_symbol = "[](bold green)"
 error_symbol = "[](bold red)"
 vicmd_symbol = "[](bold blue)"
-
-[custom.prompt_char_ro]
-when = '[ ! -w . ]'
-command = 'true'
-format = '[󰈈](bold yellow) '
-
-[custom.prompt_char_ok]
-when = '[ -w . ] && [ "${STARSHIP_CMD_STATUS:-0}" = "0" ]'
-command = 'true'
-format = '[](bold green) '
-
-[custom.prompt_char_err]
-when = '[ -w . ] && [ "${STARSHIP_CMD_STATUS:-0}" != "0" ]'
-command = 'true'
-format = '[](bold red) '
 
 [cmake]
 format = "via [$symbol$version]($style) "
@@ -184,7 +166,7 @@ format = '\([$state( $progress_current/$progress_total)]($style)\) '
 disabled = false
 format = '([\[$all_status$ahead_behind\]]($style) )'
 style = "red bold"
-stashed = '\$'
+stashed = '≡'
 ahead = "⇡"
 behind = "⇣"
 diverged = "⇕"
