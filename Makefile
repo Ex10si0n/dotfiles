@@ -1,7 +1,7 @@
 DOTFILES_DIR := $(shell pwd)
 CONFIG_TARGET := $(HOME)/.config
 
-CONFIG_APPS := nvim
+CONFIG_APPS := nvim ghostty
 
 .PHONY: all help install uninstall list install-zsh uninstall-zsh install-starship uninstall-starship
 

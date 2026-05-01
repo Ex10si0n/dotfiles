@@ -1,0 +1,85 @@
+font-family = "Maple Mono NF CN"
+font-family-bold = "Maple Mono NF CN"
+font-size = 14
+bold-is-bright = false
+
+# macOS Tahoe: native tab bar on top with + button
+macos-titlebar-style = tabs
+
+macos-icon = official
+
+# Glass blur — macOS 26 Tahoe
+# Tune opacity here; lower values let the blur show through more in neovim.
+# Note: neovim colorschemes repaint their own background and override this
+# unless you set `Normal { bg = none }` in your neovim config (see below).
+background-opacity = 0.9
+background-blur = macos-glass-clear
+
+# Window
+window-decoration = auto
+window-theme = dark
+window-padding-x = 12
+window-padding-y = 12
+# Extend the nearest cell's background into the padding area instead of
+# using the raw background color. This prevents neovim's colorscheme from
+# leaving a mismatched solid-color border around the editor.
+window-padding-color = extend
+
+# Tab behavior
+window-new-tab-position = end
+
+# ── Apple HIG System Colors (macOS dark mode) ─────────────────────────────
+# Ref: developer.apple.com/design/human-interface-guidelines/color
+#
+# Background: secondarySystemBackground  #1C1C1E
+# Foreground: label (primary)            #EBEBF5
+background = #1c1c1e
+foreground = #ebebf5
+
+# Normal (0-7)
+#   0  systemBackground          #000000  — true black
+#   1  systemRed                 #FF453A
+#   2  systemGreen               #30D158
+#   3  systemYellow / systemOrange #FFD60A / #FF9F0A  → warm yellow
+#   4  systemBlue                #0A84FF
+#   5  systemPurple              #BF5AF2
+#   6  systemTeal                #40CBE0
+#   7  label (secondary)         #EBEBF5
+palette = 0=#000000
+palette = 1=#ff453a
+palette = 2=#30d158
+palette = 3=#ffd60a
+palette = 4=#0a84ff
+palette = 5=#bf5af2
+palette = 6=#40cbe0
+palette = 7=#ebebf5
+
+# Bright (8-15)
+#   8  tertiarySystemBackground  #3A3A3C  — elevated surface
+#   9  systemPink                #FF375F
+#  10  systemMint                #63e6e2
+#  11  systemOrange              #ff9f0a
+#  12  systemIndigo              #5e5ce6
+#  13  systemPurple (vibrant)    #da8fff
+#  14  systemCyan                #65d1ff
+#  15  white label               #ffffff
+palette = 8=#3a3a3c
+palette = 9=#ff375f
+palette = 10=#63e6e2
+palette = 11=#ff9f0a
+palette = 12=#5e5ce6
+palette = 13=#da8fff
+palette = 14=#65d1ff
+palette = 15=#ffffff
+
+# Cursor — systemBlue (Apple HIG)
+cursor-style = block
+cursor-style-blink = false
+cursor-color = #0a84ff
+
+# Cursor sweep shader
+custom-shader = shaders/cursor_sweep.glsl
+custom-shader-animation = always
+
+# Shell
+shell-integration = detect
