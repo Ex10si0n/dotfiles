@@ -11,9 +11,15 @@ export KEYTIMEOUT=20
 source ~/.zshplugins/znap/znap.zsh
 
 # Plugins
-znap source zsh-users/zsh-syntax-highlighting
-znap source zsh-users/zsh-autosuggestions
+# Load syntax highlighting last so it can hook into the widgets installed by
+# autocomplete and autosuggestions.
 znap source marlonrichert/zsh-autocomplete
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+
+# Submit the command line when Enter is pressed from an autocomplete menu.
+bindkey -M menuselect '^M' .accept-line
+bindkey -M menuselect '^J' .accept-line
 
 # General Aliases
 alias g="git"
@@ -36,7 +42,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 # Node Versions Manager
-# export NVM_DIR="$HOME/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
@@ -50,5 +56,5 @@ eval "$(zoxide init zsh)"
 export PATH="$PATH:/Users/ex10si0n/.lmstudio/bin"
 # End of LM Studio CLI section
 
-
-. "$HOME/.local/share/../bin/env"
+# Rclone Default Excludes
+export RCLONE_EXCLUDE_FROM="$HOME/.config/rclone/excludes.txt"
