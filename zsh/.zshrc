@@ -67,6 +67,3 @@ export PATH="$PATH:/Users/ex10si0n/.lmstudio/bin"
 # Added by Antigravity
 export PATH="/Users/ex10si0n/.antigravity/antigravity/bin:$PATH"
 
-# Rclone Default Excludes
-export RCLONE_EXCLUDE_FROM="$HOME/.config/rclone/excludes.txt"
-
