@@ -40,6 +40,7 @@ $zig\
 (↑ Toolchain version modules ↑)\
 $nix_shell\
 $conda\
+${custom.lm_studio}\
 $memory_usage\
 $aws\
 $gcloud\
@@ -173,7 +174,7 @@ diverged = "⇕"
 conflicted = "="
 deleted = "✘"
 renamed = "»"
-modified = "!"
+modified = "*"
 staged = "+"
 untracked = "?"
 
@@ -368,3 +369,12 @@ disabled = false
 format = "via [$symbol$version]($style) "
 symbol = "↯ "
 style = "bold yellow"
+
+[custom.lm_studio]
+command = "lms ps --json 2>/dev/null | jq -r '.[0].identifier // empty' | sed 's|.*/||'"
+when = "lms ps --json 2>/dev/null | jq -e 'length > 0' > /dev/null 2>&1"
+format = "on [$symbol$output]($style) "
+symbol = "󰧑 "
+style = "bold cyan"
+description = "LM Studio loaded model"
+ignore_timeout = true

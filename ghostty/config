@@ -2,18 +2,13 @@ font-family = "Maple Mono NF CN"
 font-family-bold = "Maple Mono NF CN"
 font-size = 14
 bold-is-bright = false
+macos-option-as-alt = true
 
 # macOS Tahoe: native tab bar on top with + button
 macos-titlebar-style = tabs
 
 macos-icon = official
 
-# Glass blur — macOS 26 Tahoe
-# Tune opacity here; lower values let the blur show through more in neovim.
-# Note: neovim colorschemes repaint their own background and override this
-# unless you set `Normal { bg = none }` in your neovim config (see below).
-background-opacity = 0.9
-background-blur = macos-glass-clear
 
 # Window
 window-decoration = auto
@@ -33,7 +28,7 @@ window-new-tab-position = end
 #
 # Background: secondarySystemBackground  #1C1C1E
 # Foreground: label (primary)            #EBEBF5
-background = #1c1c1e
+background = #0c0c0e
 foreground = #ebebf5
 
 # Normal (0-7)

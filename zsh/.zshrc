@@ -17,17 +17,25 @@ znap source marlonrichert/zsh-autocomplete
 
 # General Aliases
 alias g="git"
+alias y="yarn"
 alias py="python3"
 alias vim="nvim"
 alias m="make"
 alias ls="eza"
 alias cd="z"
+alias lg="lazygit"
+alias mactop="macmon"
+alias postman="posting"
 
 # Default Softwares
 export EDITOR=nvim
 
 # fzf Key Bindings
-source <(fzf --zsh)
+ulimit -n 4096
+if [[ ! -f ~/.cache/fzf-init.zsh ]]; then
+    mkdir -p ~/.cache && fzf --zsh >~/.cache/fzf-init.zsh
+fi
+source ~/.cache/fzf-init.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude Library --exclude Documents . /Users/ex10si0n /Volumes/Code'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
@@ -50,5 +58,12 @@ eval "$(zoxide init zsh)"
 export PATH="$PATH:/Users/ex10si0n/.lmstudio/bin"
 # End of LM Studio CLI section
 
+# Added by Antigravity
+export PATH="/Users/ex10si0n/.antigravity/antigravity/bin:$PATH"
 
-. "$HOME/.local/share/../bin/env"
+# Added by Antigravity
+export PATH="/Users/ex10si0n/.antigravity/antigravity/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/ex10si0n/.local/bin:$PATH"
