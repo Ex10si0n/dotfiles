@@ -1,7 +1,7 @@
 DOTFILES_DIR := $(shell pwd)
 CONFIG_TARGET := $(HOME)/.config
 
-CONFIG_APPS := nvim ghostty fish
+CONFIG_APPS := nvim ghostty fish karabiner
 
 .PHONY: all help install uninstall list install-zsh uninstall-zsh install-starship uninstall-starship
 

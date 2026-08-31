@@ -2,16 +2,38 @@
 
 ## 🛠 Config Philosophy: The Composable Workspace
 
-This directory houses the configuration files that power my development environment. The setup is guided by a philosophy of modularity, speed, and context-awareness.
+This repository houses the modular dotfiles and configuration files that power my macOS development environment. The setup is guided by a philosophy of speed, ergonomics, minimalism, and context-awareness.
 
-## 🎯 Core Principles
+## 🎯 Core Components & Principles
 
-- **Neovim as a Surgical Tool**: Neovim is used for configuration modification, debugging, and rapid code edits. It is not a bloated IDE. It is kept lean to ensure near-instant startup times and high-performance text manipulation.
+- **Ghostty as the Terminal Foundation**: [Ghostty](ghostty/config) serves as the primary terminal emulator, configured with native macOS tabs, clean Maple Mono typography, dark aesthetics (`#0c0c0e`), and `macos-option-as-alt` for terminal navigation.
 
-- **Tmux as the Environment Engine**: While Neovim handles the files, Tmux handles the workspace. I use Tmux for session management, window multiplexing, and creating a persistent "IDE-like" experience that survives shell restarts.
+- **Dual-Shell Workflow (Zsh & Fish)**:
+  - **[Fish](fish/config.fish)**: An interactive, modern shell configured with Vi mode (`jk` escape binding), fzf keybindings, and fast toolchain integrations.
+  - **[Zsh](zsh/.zshrc)**: A robust POSIX shell powered by `znap` for instant startup, featuring syntax highlighting, autosuggestions, autocomplete menu navigation, and cached `fzf` integration.
 
-- **The Ergonomic Shell (Zsh + Fish Spirit)**: I use Zsh for its robust POSIX compliance and ecosystem, but I configure it to "embrace the fish"—incorporating ultra-responsive autosuggestions, syntax highlighting, and substring searching.
+- **[Starship](starship/starship.toml) for Universal Context**: A unified, cross-shell prompt shared between Zsh and Fish. Features active shell environment indicators (`󰈺 fish`, `zsh`), git status, runtime toolchains, and custom LM Studio model monitoring.
 
-- **Starship for Universal Context**: Starship serves as the global prompt style. It provides a consistent, minimal, and fast visual state across any shell or environment, ensuring I always know my git branch, runtime versions, and command exit codes at a glance.
+- **[Neovim](nvim/) as a Surgical Editor**: Kept lean and fast for configuration edits, quick code reviews, and high-performance text manipulation without IDE bloat.
 
-- **keyd for Muscle-Memory Portability**: keyd remaps keys at the kernel level so the same muscle memory works everywhere on Linux. The core idea is to make the physical keyboard behave like a macOS layout—physical `Ctrl` acts as `Command (Meta)`, and physical `Meta` acts as `Ctrl`—so macOS-style shortcuts (`Cmd+C/V/Z/...`) work natively in Linux apps. `CapsLock` is repurposed as `Ctrl` on hold and `Cmd+Space` on tap, eliminating the need to reach for a distant key. A `[control]` layer adds Vim-style `hjkl` navigation and word-wise jumps (`w`/`b`) under the `Ctrl` modifier. Terminal emulators (ghostty, gnome-terminal) are exempted from the swap so raw `Ctrl` signals (e.g., `Ctrl+C`) still reach the shell correctly.
+- **[Karabiner-Elements](karabiner/karabiner.json) for System-Wide Ergonomics**: Uses the "Alpine Vim" profile to bring seamless modal editing and ergonomics to macOS:
+  - `CapsLock` mapped to `Ctrl` (held) with dual-role modifiers.
+  - `Ctrl + H/J/K/L` for system-wide Vim directional navigation.
+  - `Ctrl + W/B` for word-wise movement (exempted inside terminal emulators).
+  - Quick input source switching and window management shortcuts.
+
+## 📦 Installation & Management
+
+Configurations are symlinked using [GNU Stow](https://www.gnu.org/software/stow/) via the provided [Makefile](Makefile):
+
+```bash
+# Stow all configurations
+make install
+
+# View all active symlinks
+make list
+
+# Unstow all configurations
+make uninstall
+```
+
